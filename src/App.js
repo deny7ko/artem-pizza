@@ -1,17 +1,19 @@
-import React from 'react';
-import './App.css';
-import Constructor from './Constructor'
-import Summary from './Summary'
+import React from "react";
+import "./App.css";
+import Constructor from "./Constructor";
+import Summary from "./Summary";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import RegisrationPage from "./pages/RegistrationPage";
 
-class App extends React.Component {
+class Main extends React.Component {
   constructor(props) {
     super(props);
-    this.state        = {
+    this.state = {
       showSummaryPage: false,
       showConstructorPage: true,
       selectedIngredients: {},
-      totalPrice: 0
-    }
+      totalPrice: 0,
+    };
   }
 
   handleSubmit = ({ selectedIngredients, totalPrice }) => {
@@ -19,17 +21,35 @@ class App extends React.Component {
       showSummaryPage: true,
       showConstructorPage: false,
       selectedIngredients: selectedIngredients,
-      totalPrice: totalPrice
-    })
-  }
+      totalPrice: totalPrice,
+    });
+  };
 
   render() {
-    return <div style={{padding: "2em"}}>
-      <h1>🍕Собери пиццу сам!🍕</h1>
-      {this.state.showConstructorPage && <Constructor onSubmit={this.handleSubmit} />}
-      {this.state.showSummaryPage && <Summary selectedIngredients={this.state.selectedIngredients} totalPrice={this.state.totalPrice} />}
-    </div>
+    return (
+      <div style={{ padding: "2em" }}>
+        <h1>🍕Собери пиццу сам!🍕</h1>
+        {this.state.showConstructorPage && (
+          <Constructor onSubmit={this.handleSubmit} />
+        )}
+        {this.state.showSummaryPage && (
+          <Summary
+            selectedIngredients={this.state.selectedIngredients}
+            totalPrice={this.state.totalPrice}
+          />
+        )}
+      </div>
+    );
   }
 }
+
+const App = () => (
+  <Router>
+    <Main />
+    <Route exact path="/sign-up">
+      <RegisrationPage />
+    </Route>
+  </Router>
+);
 
 export default App;
