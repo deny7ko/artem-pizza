@@ -1,11 +1,12 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import RegisrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderSummaryPage from "./pages/OrderSummaryPage"
 import OrderListPage from "./pages/OrderListPage"
+import ConstructorPage from "./pages/ConstructorPage"
 
 class Main extends React.Component {
   constructor(props) {
@@ -30,6 +31,15 @@ class Main extends React.Component {
   render() {
     return (
       <div style={{ padding: "2em" }}>
+        <nav>
+          <p>
+            <Link to="/register">Register</Link> or <Link to="/login">Login</Link>
+          </p>
+
+          <p>
+            <Link to="/constructor">Select Pizza</Link>
+          </p>
+        </nav>
         {this.props.children}
       </div>
 
@@ -58,6 +68,10 @@ const App = () => (
 
       <Route exact path="/order-list">
         <OrderListPage />
+      </Route>
+
+      <Route exact path="/constructor">
+        <ConstructorPage />
       </Route>
     </Main>
   </Router>

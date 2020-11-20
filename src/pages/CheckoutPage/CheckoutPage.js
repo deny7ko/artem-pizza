@@ -1,6 +1,7 @@
 import React from "react";
 import Summary from './Summary'
-import InputGroup from 'core/InputGroup'
+import InputGroup from 'components/InputGroup'
+import CurrentOrderContext from 'contexts/CurrentOrderContext'
 
 class CheckoutPage extends React.Component {
   render() {
@@ -21,4 +22,22 @@ class CheckoutPage extends React.Component {
   }
 }
 
-export default CheckoutPage
+class CurrentOrderDecorator extends React.Component {
+  render() {
+    return (
+      <CurrentOrderContext.Consumer>
+          {
+            ({currentOrder, setCurrentOrder}) => {
+              console.log(currentOrder)
+
+              return (
+                <CheckoutPage currentOrder={currentOrder} />
+              )
+            }
+          }
+        </CurrentOrderContext.Consumer>
+    )
+  }
+}
+
+export default CurrentOrderDecorator

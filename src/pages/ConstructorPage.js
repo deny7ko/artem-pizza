@@ -1,11 +1,14 @@
 import React from 'react';
-import InputGroup from './InputGroup'
-import calculateTotalPrice from './calculateTotalPrice'
+import InputGroup from 'components/InputGroup'
+import calculateTotalPrice from 'utils/calculateTotalPrice'
+import CurrentOrderContext from 'contexts/CurrentOrderContext'
+import { Redirect } from "react-router-dom";
 
-class Constructor extends React.Component {
+class ConstructorPage extends React.Component {
   constructor(props) {
     super(props);
     this.state        = {
+      submitted: false,
       selectedIngredients: {
       }
     }
@@ -46,15 +49,23 @@ class Constructor extends React.Component {
   submitForm = (event) => {
     event.preventDefault()
     const {selectedIngredients } = this.state
-
-    this.props.onSubmit({ selectedIngredients, totalPrice: this.totalPrice })
+    debugger
+    this.props.setCurrentOrder(selectedIngredients)
+    debugger
+    this.setState({submitted: true})
   }
 
   render() {
+    if (this.state.submitted) {
+      return <Redirect to="/checkout" />
+    }
+
     this.totalPrice = calculateTotalPrice(this.state.selectedIngredients)
 
     return (
       <form onSubmit={this.submitForm} ref={this.formElement}>
+        <h2>Выбери свою пицу</h2>
+
         <input type="submit" value={`Заказать за ${this.totalPrice}$`} />
         <InputGroup type="radio" title="Размер" onChange={this.onRadioInputChange} inputDataList={[
           {name: "Размер", value: "30cm", title: "30cm"},
@@ -96,4 +107,22 @@ class Constructor extends React.Component {
   }
 }
 
-export default Constructor;
+class CurrentOrderDecorator extends React.Component {
+  render() {
+    return (
+      <CurrentOrderContext.Consumer>
+          {
+            ({currentOrder, setCurrentOrder}) => {
+              console.log(currentOrder)
+
+              return (
+                <ConstructorPage setCurrentOrder={setCurrentOrder} currentOrder={currentOrder} />
+              )
+            }
+          }
+        </CurrentOrderContext.Consumer>
+    )
+  }
+}
+
+export default CurrentOrderDecorator;
