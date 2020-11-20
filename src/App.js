@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import RegisrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import OrderSummaryPage from "./pages/OrderSummaryPage"
+import OrderListPage from "./pages/OrderListPage"
 
 class Main extends React.Component {
   constructor(props) {
@@ -50,16 +52,13 @@ const App = () => (
         <CheckoutPage />
       </Route>
 
-      {/* <Route exact path="/constructor">
-        <Constructor onSubmit={this.handleSubmit} />
+      <Route exact path="/order-summary">
+        <OrderSummaryPage />
       </Route>
 
-      <Route exact path="/summary">
-        <Summary
-            selectedIngredients={this.state.selectedIngredients}
-            totalPrice={this.state.totalPrice}
-          />
-      </Route> */}
+      <Route exact path="/order-list">
+        <OrderListPage />
+      </Route>
     </Main>
   </Router>
 );
