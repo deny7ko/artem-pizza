@@ -28,27 +28,31 @@ class Main extends React.Component {
   render() {
     return (
       <div style={{ padding: "2em" }}>
-        <h1>🍕Собери пиццу сам!🍕</h1>
-        {this.state.showConstructorPage && (
-          <Constructor onSubmit={this.handleSubmit} />
-        )}
-        {this.state.showSummaryPage && (
-          <Summary
-            selectedIngredients={this.state.selectedIngredients}
-            totalPrice={this.state.totalPrice}
-          />
-        )}
+        {this.props.children}
       </div>
+
     );
   }
 }
 
 const App = () => (
   <Router>
-    <Main />
-    <Route exact path="/sign-up">
-      <RegisrationPage />
-    </Route>
+    <Main>
+      <Route exact path="/registration">
+        <RegisrationPage />
+      </Route>
+
+      {/* <Route exact path="/constructor">
+        <Constructor onSubmit={this.handleSubmit} />
+      </Route>
+
+      <Route exact path="/summary">
+        <Summary
+            selectedIngredients={this.state.selectedIngredients}
+            totalPrice={this.state.totalPrice}
+          />
+      </Route> */}
+    </Main>
   </Router>
 );
 

@@ -11,14 +11,19 @@ class RegistrationPage extends React.Component {
   render() {
     return (
       <>
-        <h1>Sign Up</h1>
+        <h1>Register</h1>
         <h2>or login</h2>
         <form>
           <div>
+            <label for="login">Login</label>
             <input type="text" placeholde="login" />
           </div>
           <div>
-            <input type="password" placeholde="password" />
+            <label for="password">Password</label>
+            <input type="password" />
+          </div>
+          <div>
+            <input type="submit" value="Submit"></input>
           </div>
         </form>
       </>
