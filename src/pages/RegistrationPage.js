@@ -28,7 +28,7 @@ class RegistrationPage extends React.Component {
             <input type="password_confirmation" required />
           </div>
           <div>
-            <input type="submit" value="Submit"></input>
+            <input data-testid="registration-page-submit" type="submit" value="Submit"></input>
           </div>
         </form>
       </>

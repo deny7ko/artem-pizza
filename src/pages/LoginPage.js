@@ -16,15 +16,15 @@ class LoginPage extends React.Component {
         <h3>or <Link to="/register">register</Link></h3>
         <form>
           <div>
-            <label for="login">Login</label>
+            <label htmlFor="login">Login</label>
             <input type="text" required placeholde="login" />
           </div>
           <div>
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input type="password" required />
           </div>
           <div>
-            <input type="submit" value="Submit"></input>
+            <input data-testid="login-page-submit" type="submit" value="Submit"></input>
           </div>
         </form>
       </>

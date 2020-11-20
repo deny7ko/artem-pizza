@@ -49,9 +49,7 @@ class ConstructorPage extends React.Component {
   submitForm = (event) => {
     event.preventDefault()
     const {selectedIngredients } = this.state
-    debugger
     this.props.setCurrentOrder(selectedIngredients)
-    debugger
     this.setState({submitted: true})
   }
 
@@ -64,7 +62,7 @@ class ConstructorPage extends React.Component {
 
     return (
       <form onSubmit={this.submitForm} ref={this.formElement}>
-        <h2>Выбери свою пицу</h2>
+        <h2>Конструктор Пицы</h2>
 
         <input type="submit" value={`Заказать за ${this.totalPrice}$`} />
         <InputGroup type="radio" title="Размер" onChange={this.onRadioInputChange} inputDataList={[
