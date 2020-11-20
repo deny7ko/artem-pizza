@@ -1,9 +1,8 @@
 import React from "react";
 import "./App.css";
-import Constructor from "./Constructor";
-import Summary from "./Summary";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import RegisrationPage from "./pages/RegistrationPage";
+import LoginPage from "./pages/LoginPage";
 
 class Main extends React.Component {
   constructor(props) {
@@ -38,8 +37,12 @@ class Main extends React.Component {
 const App = () => (
   <Router>
     <Main>
-      <Route exact path="/registration">
+      <Route exact path="/register">
         <RegisrationPage />
+      </Route>
+
+      <Route exact path="/login">
+        <LoginPage />
       </Route>
 
       {/* <Route exact path="/constructor">
