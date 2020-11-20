@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import RegisrationPage from "./pages/RegistrationPage";
 import LoginPage from "./pages/LoginPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 class Main extends React.Component {
   constructor(props) {
@@ -43,6 +44,10 @@ const App = () => (
 
       <Route exact path="/login">
         <LoginPage />
+      </Route>
+
+      <Route exact path="/checkout">
+        <CheckoutPage />
       </Route>
 
       {/* <Route exact path="/constructor">
