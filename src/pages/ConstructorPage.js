@@ -1,10 +1,12 @@
 import React from 'react';
 import InputGroup from 'components/InputGroup'
 import calculateTotalPrice from 'utils/calculateTotalPrice'
-import CurrentOrderContext from 'contexts/CurrentOrderContext'
 import { Redirect } from "react-router-dom";
+import CurrentOrderContext from "contexts/CurrentOrderContext"
 
 class ConstructorPage extends React.Component {
+  static contextType = CurrentOrderContext
+
   constructor(props) {
     super(props);
     this.state        = {
@@ -49,8 +51,12 @@ class ConstructorPage extends React.Component {
   submitForm = (event) => {
     event.preventDefault()
     const {selectedIngredients } = this.state
-    this.props.setCurrentOrder(selectedIngredients)
+    this.contextSetOrder(selectedIngredients)
     this.setState({submitted: true})
+  }
+
+  componentDidMount() {
+    this.contextSetOrder = this.context.setOrder
   }
 
   render() {
@@ -105,22 +111,6 @@ class ConstructorPage extends React.Component {
   }
 }
 
-class CurrentOrderDecorator extends React.Component {
-  render() {
-    return (
-      <CurrentOrderContext.Consumer>
-          {
-            ({currentOrder, setCurrentOrder}) => {
-              console.log(currentOrder)
 
-              return (
-                <ConstructorPage setCurrentOrder={setCurrentOrder} currentOrder={currentOrder} />
-              )
-            }
-          }
-        </CurrentOrderContext.Consumer>
-    )
-  }
-}
 
-export default CurrentOrderDecorator;
+export default ConstructorPage;

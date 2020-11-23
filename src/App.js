@@ -7,6 +7,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import OrderSummaryPage from "./pages/OrderSummaryPage"
 import OrderListPage from "./pages/OrderListPage"
 import ConstructorPage from "./pages/ConstructorPage"
+import { CurrentOrderProvider } from "./contexts/CurrentOrderContext"
 
 class Main extends React.Component {
   constructor(props) {
@@ -49,31 +50,33 @@ class Main extends React.Component {
 
 const App = () => (
   <Router>
-    <Main>
-      <Route exact path="/register">
-        <RegisrationPage />
-      </Route>
+    <CurrentOrderProvider>
+      <Main>
+        <Route exact path="/register">
+          <RegisrationPage />
+        </Route>
 
-      <Route exact path="/login">
-        <LoginPage />
-      </Route>
+        <Route exact path="/login">
+          <LoginPage />
+        </Route>
 
-      <Route exact path="/checkout">
-        <CheckoutPage />
-      </Route>
+        <Route exact path="/checkout">
+          <CheckoutPage />
+        </Route>
 
-      <Route exact path="/order-summary">
-        <OrderSummaryPage />
-      </Route>
+        <Route exact path="/order-summary">
+          <OrderSummaryPage />
+        </Route>
 
-      <Route exact path="/order-list">
-        <OrderListPage />
-      </Route>
+        <Route exact path="/order-list">
+          <OrderListPage />
+        </Route>
 
-      <Route exact path="/constructor">
-        <ConstructorPage />
-      </Route>
-    </Main>
+        <Route exact path="/constructor">
+          <ConstructorPage />
+        </Route>
+      </Main>
+    </CurrentOrderProvider>
   </Router>
 );
 
