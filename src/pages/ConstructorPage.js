@@ -51,12 +51,8 @@ class ConstructorPage extends React.Component {
   submitForm = (event) => {
     event.preventDefault()
     const {selectedIngredients } = this.state
-    this.contextSetOrder(selectedIngredients)
+    this.context.setOrder(selectedIngredients)
     this.setState({submitted: true})
-  }
-
-  componentDidMount() {
-    this.contextSetOrder = this.context.setOrder
   }
 
   render() {
