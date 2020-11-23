@@ -16,15 +16,15 @@ class RegistrationPage extends React.Component {
         <h3>or <Link to="/login">login</Link></h3>
         <form>
           <div>
-            <label for="login">Login</label>
+            <label htmlFor="login">Login</label>
             <input type="text" placeholde="login" required />
           </div>
           <div>
-            <label for="password">Password</label>
+            <label htmlFor="password">Password</label>
             <input type="password" required />
           </div>
           <div>
-            <label for="password_confirmation">Confirmation</label>
+            <label htmlFor="password_confirmation">Confirmation</label>
             <input type="password_confirmation" required />
           </div>
           <div>
