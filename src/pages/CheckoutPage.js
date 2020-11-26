@@ -1,78 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import InputGroup from 'sharedComponents/InputGroup'
 import calculateTotalPrice from 'utils/calculateTotalPrice'
-import CurrentOrderContext from "contexts/CurrentOrderContext"
 import { Redirect } from "react-router-dom";
 
-class CheckoutPage extends React.Component {
-  static contextType = CurrentOrderContext
+const CheckoutPage = ({ order, updateOrderContext }) => {
+  const [submitted, setSubmitted] = useState(false)
+  const [form, setForm] = useState({})
+  const totalPrice = calculateTotalPrice(order.selectedIngredients)
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      submitted: false,
-      order: {},
-      form: {}
-    }
-  }
-
-  submitForm = (event) => {
+  const submitForm = (event) => {
     event.preventDefault()
-    this.context.setPaymentType(this.state.form.payment_type)
-    this.setState({submitted: true})
+    updateOrderContext(form)
+    setSubmitted(true)
   }
 
-  componentDidMount() {
-    this.setState({order: this.context.order})
+  const onRadioInputChange = (event) => {
+    setForm({...form, [event.target.name]: event.target.value})
   }
 
-  onRadioInputChange = (event) => {
-    this.setState((prevState) => ({
-      form: {
-        ...prevState.form,
-        [event.target.name]: event.target.value
-      }
-    }))
+  if (submitted) {
+    return <Redirect to="/order-summary" />
   }
 
-  render() {
-    if (this.state.submitted) {
-      return <Redirect to="/order-summary" />
-    }
+  return (
+    <>
+      <h2>Checkout</h2>
+      <form onSubmit={submitForm}>
+        <input type="submit" value={`Заказать за ${totalPrice}$`} />
 
-    const order = this.state.order;
-    const totalPrice = calculateTotalPrice(order)
-
-    return (
-      <>
-        <h2>Checkout</h2>
-        <form onSubmit={this.submitForm}>
-          <input type="submit" value={`Заказать за ${totalPrice}$`} />
-
-          <InputGroup type="radio" onChange={this.onRadioInputChange} title="Оплата" inputDataList={[
-            {name: "payment_type", value: "card", title: "Картой"},
-            {name: "payment_type", value: "cash", title: "Наличка"}
-            ]} />
-        </form>
-      </>
-    );
-  }
+        <InputGroup type="radio" onChange={onRadioInputChange} title="Оплата" inputDataList={[
+          {name: "payment_type", value: "card", title: "Картой"},
+          {name: "payment_type", value: "cash", title: "Наличка"}
+          ]} />
+      </form>
+    </>
+  );
 }
 
-class CurrentOrderDecorator extends React.Component {
-  render() {
-    return (
-      <CurrentOrderContext.Consumer>
-          {
-            ({currentOrder, setCurrentOrder}) => {
-              return (
-                <CheckoutPage currentOrder={currentOrder} />
-              )
-            }
-          }
-        </CurrentOrderContext.Consumer>
-    )
-  }
-}
-
-export default CurrentOrderDecorator
+export default CheckoutPage

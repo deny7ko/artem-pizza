@@ -7,39 +7,41 @@ import CheckoutPage from "./pages/CheckoutPage";
 import OrderSummaryPage from "./pages/OrderSummaryPage"
 import OrderListPage from "./pages/OrderListPage"
 import ConstructorPage from "./pages/ConstructorPage"
-import { CurrentOrderProvider } from "./contexts/CurrentOrderContext"
+import {useOrderContext} from "./contexts/OrderContext"
 import Layout from './Layout'
 
-const App = () => (
+const App = () => {
+  const {order, updateOrder} = useOrderContext()
+
+  return (
   <Router>
-    <CurrentOrderProvider>
-      <Layout>
-        <Route exact path="/register">
-          <RegisrationPage />
-        </Route>
+    <Layout>
+      <Route exact path="/register">
+        <RegisrationPage />
+      </Route>
 
-        <Route exact path="/login">
-          <LoginPage />
-        </Route>
+      <Route exact path="/login">
+        <LoginPage />
+      </Route>
 
-        <Route exact path="/checkout">
-          <CheckoutPage />
-        </Route>
+      <Route exact path="/checkout">
+        <CheckoutPage order={order} updateOrderContext={updateOrder} />
+      </Route>
 
-        <Route exact path="/order-summary">
-          <OrderSummaryPage />
-        </Route>
+      <Route exact path="/order-summary">
+        <OrderSummaryPage order={order} />
+      </Route>
 
-        <Route exact path="/order-list">
-          <OrderListPage />
-        </Route>
+      <Route exact path="/order-list">
+        <OrderListPage />
+      </Route>
 
-        <Route exact path="/constructor">
-          <ConstructorPage />
-        </Route>
-      </Layout>
-    </CurrentOrderProvider>
+      <Route exact path="/constructor">
+        <ConstructorPage updateOrderContext={updateOrder} />
+      </Route>
+    </Layout>
   </Router>
-);
+  )
+}
 
 export default App;
