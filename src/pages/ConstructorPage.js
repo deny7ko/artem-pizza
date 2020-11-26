@@ -1,5 +1,5 @@
 import React from 'react';
-import InputGroup from 'shared-components/InputGroup'
+import InputGroup from 'sharedComponents/InputGroup'
 import calculateTotalPrice from 'utils/calculateTotalPrice'
 import { Redirect } from "react-router-dom";
 import CurrentOrderContext from "contexts/CurrentOrderContext"
