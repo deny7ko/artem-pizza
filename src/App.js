@@ -1,35 +1,45 @@
-import React from 'react';
-import './App.css';
-import Constructor from './Constructor'
-import Summary from './Summary'
+import React from "react";
+import "./App.css";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import RegisrationPage from "./pages/RegistrationPage";
+import LoginPage from "./pages/LoginPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import OrderSummaryPage from "./pages/OrderSummaryPage"
+import OrderListPage from "./pages/OrderListPage"
+import ConstructorPage from "./pages/ConstructorPage"
+import { CurrentOrderProvider } from "./contexts/CurrentOrderContext"
+import Layout from './Layout'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state        = {
-      showSummaryPage: false,
-      showConstructorPage: true,
-      selectedIngredients: {},
-      totalPrice: 0
-    }
-  }
+const App = () => (
+  <Router>
+    <CurrentOrderProvider>
+      <Layout>
+        <Route exact path="/register">
+          <RegisrationPage />
+        </Route>
 
-  handleSubmit = ({ selectedIngredients, totalPrice }) => {
-    this.setState({
-      showSummaryPage: true,
-      showConstructorPage: false,
-      selectedIngredients: selectedIngredients,
-      totalPrice: totalPrice
-    })
-  }
+        <Route exact path="/login">
+          <LoginPage />
+        </Route>
 
-  render() {
-    return <div style={{padding: "2em"}}>
-      <h1>🍕Собери пиццу сам!🍕</h1>
-      {this.state.showConstructorPage && <Constructor onSubmit={this.handleSubmit} />}
-      {this.state.showSummaryPage && <Summary selectedIngredients={this.state.selectedIngredients} totalPrice={this.state.totalPrice} />}
-    </div>
-  }
-}
+        <Route exact path="/checkout">
+          <CheckoutPage />
+        </Route>
+
+        <Route exact path="/order-summary">
+          <OrderSummaryPage />
+        </Route>
+
+        <Route exact path="/order-list">
+          <OrderListPage />
+        </Route>
+
+        <Route exact path="/constructor">
+          <ConstructorPage />
+        </Route>
+      </Layout>
+    </CurrentOrderProvider>
+  </Router>
+);
 
 export default App;

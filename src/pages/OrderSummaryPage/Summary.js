@@ -12,6 +12,7 @@ class Summary extends React.Component {
       <>
         <h2>Итоговый заказ</h2>
         <h3>Цена: {this.props.totalPrice}$</h3>
+        <h4>Оплата: {this.props.paymentType}</h4>
         <div>
           {
             ingredientTypes.map(ingredientType => (
