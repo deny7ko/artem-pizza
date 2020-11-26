@@ -9,7 +9,7 @@ class CheckoutPage extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state        = {
+    this.state = {
       submitted: false,
       order: {},
       form: {}
