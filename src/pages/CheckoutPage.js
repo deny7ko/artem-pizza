@@ -65,8 +65,6 @@ class CurrentOrderDecorator extends React.Component {
       <CurrentOrderContext.Consumer>
           {
             ({currentOrder, setCurrentOrder}) => {
-              console.log(currentOrder)
-
               return (
                 <CheckoutPage currentOrder={currentOrder} />
               )
