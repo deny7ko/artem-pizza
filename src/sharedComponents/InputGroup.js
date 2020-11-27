@@ -1,6 +1,6 @@
 import Input from './Input'
 
-const InputGroup = ({ title, type, inputDataList, onChange }) => (
+const InputGroup = ({ title, type, inputDataList, onChange, register }) => (
   <fieldset>
     <legend>{title}</legend>
     {inputDataList.map(inputData => {
@@ -15,6 +15,7 @@ const InputGroup = ({ title, type, inputDataList, onChange }) => (
           title={title}
           type={type}
           onChange={onChange}
+          ref={register}
         />
       )
     })}
