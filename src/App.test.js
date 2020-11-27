@@ -14,25 +14,18 @@ const renderApplication = () => {
 }
 
 describe('when user clicks on `Select Pizza`', () => {
-  it('renders pizza constructor', () => {
-    renderApplication()
-
-    act(() => {
-      userEvent.click(screen.getByText('Select Pizza'))
-    })
-
-    expect(screen.getByText('Конструктор Пицы')).toBeInTheDocument()
-  })
-
   it('calculates price on each click', () => {
     renderApplication()
 
     act(() => {
       userEvent.click(screen.getByText('Select Pizza'))
+    })
+
+    act(() => {
       userEvent.click(screen.getByText('35cm'))
     })
 
-    expect(screen.getByText('Заказать за 250$')).toBeInTheDocument()
+    expect(screen.getByText('Заказать за 229$')).toBeInTheDocument()
 
     act(() => {
       userEvent.click(screen.getByText('пышное'))
@@ -43,19 +36,18 @@ describe('when user clicks on `Select Pizza`', () => {
       userEvent.click(screen.getByText('бекон'))
     })
 
-    expect(screen.getByText('Заказать за 424$')).toBeInTheDocument()
+    expect(screen.getByText('Заказать за 403$')).toBeInTheDocument()
   })
 
-  it('proceeds to the summary page with order summary', () => {
+  it('proceeds to the summary page with order summary', async () => {
     renderApplication()
 
     act(() => {
       userEvent.click(screen.getByText('Select Pizza'))
-      userEvent.click(screen.getByText('35cm'))
     })
 
-    act(() => {
-      userEvent.click(screen.getByText('Заказать за 250$'))
+    await act(() => {
+      userEvent.click(screen.getByText('Заказать за 200$'))
     })
 
     expect(screen.getByText('Checkout')).toBeInTheDocument()
@@ -63,8 +55,20 @@ describe('when user clicks on `Select Pizza`', () => {
 })
 
 describe('navigation', () => {
+  describe('when user clicks on `Select Pizza`', () => {
+    it('goes to Constructor page', () => {
+      renderApplication()
+
+      act(() => {
+        userEvent.click(screen.getByText('Select Pizza'))
+      })
+
+      expect(screen.getByText('Конструктор Пицы')).toBeInTheDocument()
+    })
+  })
+
   describe('when user clicks on `Login`', () => {
-    it.skip('goes to login page', () => {
+    it('goes to login page', () => {
       renderApplication()
 
       act(() => {
@@ -76,7 +80,7 @@ describe('navigation', () => {
   })
 
   describe('when user clicks on `Register`', () => {
-    it.skip('goes to register page', () => {
+    it('goes to register page', () => {
       renderApplication()
       act(() => {
         userEvent.click(screen.getByText('Register'))
