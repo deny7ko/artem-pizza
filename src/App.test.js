@@ -21,7 +21,7 @@ describe('when user clicks on `Select Pizza`', () => {
       userEvent.click(screen.getByText('Select Pizza'))
     })
 
-    // expect(screen.getByText('Конструктор Пицы')).toBeInTheDocument()
+    expect(screen.getByText('Конструктор Пицы')).toBeInTheDocument()
   })
 
   it('calculates price on each click', () => {
@@ -46,23 +46,20 @@ describe('when user clicks on `Select Pizza`', () => {
     expect(screen.getByText('Заказать за 424$')).toBeInTheDocument()
   })
 
-  // it('proceeds to the summary page with order summary', () => {
-  //   renderApplication()
+  it('proceeds to the summary page with order summary', () => {
+    renderApplication()
 
-  //   act(() => {
-  //     userEvent.click(screen.getByText('Select Pizza'))
-  //   })
+    act(() => {
+      userEvent.click(screen.getByText('Select Pizza'))
+      userEvent.click(screen.getByText('35cm'))
+    })
 
-  //   act(() => {
-  //     userEvent.click(screen.getByText('35cm'))
-  //   })
+    act(() => {
+      userEvent.click(screen.getByText('Заказать за 250$'))
+    })
 
-  //   act(() => {
-  //     userEvent.click(screen.getByText('Заказать за 250$'))
-  //   })
-
-  //   // expect(screen.getByText('Checkout')).toBeInTheDocument()
-  // })
+    expect(screen.getByText('Checkout')).toBeInTheDocument()
+  })
 })
 
 describe('navigation', () => {
@@ -70,7 +67,9 @@ describe('navigation', () => {
     it.skip('goes to login page', () => {
       renderApplication()
 
-      userEvent.click(screen.getByText('Login'))
+      act(() => {
+        userEvent.click(screen.getByText('Login'))
+      })
 
       expect(screen.getByTestId('login-page-submit')).toBeInTheDocument()
     })
@@ -79,7 +78,9 @@ describe('navigation', () => {
   describe('when user clicks on `Register`', () => {
     it.skip('goes to register page', () => {
       renderApplication()
-      userEvent.click(screen.getByText('Register'))
+      act(() => {
+        userEvent.click(screen.getByText('Register'))
+      })
 
       expect(screen.getByTestId('registration-page-submit')).toBeInTheDocument()
     })
