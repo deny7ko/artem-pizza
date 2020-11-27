@@ -39,7 +39,7 @@ describe('when user clicks on `Select Pizza`', () => {
     expect(screen.getByText('Заказать за 403$')).toBeInTheDocument()
   })
 
-  it('proceeds to the summary page with order summary', async () => {
+  it('proceeds to the checkout page after pizza constructor', async () => {
     renderApplication()
 
     act(() => {
