@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import InputGroup from 'sharedComponents/InputGroup'
 import calculateTotalPrice from 'utils/calculateTotalPrice'
 import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -24,40 +23,80 @@ const ConstructorPage = ({ updateOrderContext }) => {
       <h2>Конструктор Пицы</h2>
 
       <input type="submit" value={`Заказать за ${totalPrice}$`} />
-      <InputGroup register={register} type="radio" title="Размер" inputDataList={[
-        {name: "Размер", value: "30cm", title: "30cm"},
-        {name: "Размер", value: "35cm", title: "35cm"}
-        ]} />
 
-      <InputGroup register={register} type="radio" title="Тесто" inputDataList={[
-        {name: "Тесто", value: "тонкое", title: "тонкое"},
-        {name: "Тесто", value: "пышное", title: "пышное"}
-        ]} />
+      <fieldset>
+        <legend>Размер:</legend>
 
-      <InputGroup register={register} type="radio" title="Соус" inputDataList={[
-        {name: "Соус", value: "томатный", title: "томатный"},
-        {name: "Соус", value: "белый", title: "белый"},
-        {name: "Соус", value: "острый", title: "острый"}
-        ]} />
+        <input ref={register} type="radio" id="30cm" name="size" value="30cm" />
+        <label htmlFor="30cm">30cm</label>
 
-      <InputGroup register={register} type="checkbox" title="Сыр" inputDataList={[
-        {name: "Сыр", value: "моцарелла", title: "моцарелла"},
-        {name: "Сыр", value: "чеддар", title: "чеддар"},
-        {name: "Сыр", value: "дорблю", title: "дорблю"}
-        ]} />
+        <input ref={register} type="radio" id="35cm" name="size" value="35cm" />
+        <label htmlFor="35cm">35cm</label>
+      </fieldset>
 
-      <InputGroup register={register} type="checkbox" title="Овощи" inputDataList={[
-        {name: "Овощи", value: "томаты", title: "томаты"},
-        {name: "Овощи", value: "грибы", title: "грибы"},
-        {name: "Овощи", value: "перец", title: "перец"}
-        ]} />
+      <fieldset>
+        <legend>Тесто:</legend>
 
-      <InputGroup register={register} type="checkbox" title="Мясо" inputDataList={[
-        {name: "Мясо", value: "бекон", title: "бекон"},
-        {name: "Мясо", value: "пепперони", title: "пепперони"},
-        {name: "Мясо", value: "ветчина", title: "ветчина"}
-        ]} />
+        <input ref={register} type="radio" id="тонкое" name="dough" value="тонкое" />
+        <label htmlFor="тонкое">тонкое</label>
 
+        <input ref={register} type="radio" id="пышное" name="dough" value="пышное" />
+        <label htmlFor="пышное">пышное</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Соус:</legend>
+
+        <input ref={register} type="radio" id="томатный" name="sause" value="томатный" />
+        <label htmlFor="томатный">томатный</label>
+
+        <input ref={register} type="radio" id="белый" name="sause" value="белый" />
+        <label htmlFor="белый">белый</label>
+
+        <input ref={register} type="radio" id="острый" name="sause" value="острый" />
+        <label htmlFor="острый">острый</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Сыр:</legend>
+
+        <input ref={register} type="checkbox" id="моцарелла" name="cheese" value="моцарелла" />
+        <label htmlFor="моцарелла">моцарелла</label>
+
+        <input ref={register} type="checkbox" id="чеддар" name="cheese" value="чеддар" />
+        <label htmlFor="чеддар">чеддар</label>
+
+        <input ref={register} type="checkbox" id="дорблю" name="cheese" value="дорблю" />
+        <label htmlFor="дорблю">дорблю</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Овощи:</legend>
+
+        <input ref={register} type="checkbox" id="томаты" name="томаты" value="томаты" />
+        <label htmlFor="томаты">томаты</label>
+
+
+        <input ref={register} type="checkbox" id="грибы" name="грибы" value="грибы" />
+        <label htmlFor="грибы">грибы</label>
+
+        <input ref={register} type="checkbox" id="перец" name="перец" value="перец" />
+        <label htmlFor="перец">перец</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Мясо:</legend>
+
+        <input ref={register} type="checkbox" id="бекон" name="бекон" value="бекон" />
+        <label htmlFor="бекон">бекон</label>
+
+
+        <input ref={register} type="checkbox" id="пепперони" name="пепперони" value="пепперони" />
+        <label htmlFor="пепперони">пепперони</label>
+
+        <input ref={register} type="checkbox" id="ветчина" name="ветчина" value="ветчина" />
+        <label htmlFor="ветчина">ветчина</label>
+      </fieldset>
       <br></br>
     </form>
   )
