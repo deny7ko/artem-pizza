@@ -1,4 +1,4 @@
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 import App from './App';
 import { OrderProvider } from "./contexts/OrderContext"
@@ -46,11 +46,13 @@ describe('when user clicks on `Select Pizza`', () => {
       userEvent.click(screen.getByText('Select Pizza'))
     })
 
-    await act(() => {
+    act(() => {
       userEvent.click(screen.getByText('Заказать за 200$'))
     })
 
-    expect(screen.getByText('Checkout')).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('Checkout')).toBeInTheDocument()
+    })
   })
 })
 

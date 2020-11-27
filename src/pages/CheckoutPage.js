@@ -10,7 +10,6 @@ const CheckoutPage = ({ order, updateOrderContext }) => {
 
   const totalPrice = calculateTotalPrice(order.selectedIngredients)
   const isPaymentByCard = form.payment_type === 'card'
-  console.log(isPaymentByCard)
 
   const submitForm = () => {
     updateOrderContext(form)
