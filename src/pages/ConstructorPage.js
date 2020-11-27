@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import InputGroup from 'sharedComponents/InputGroup'
 import calculateTotalPrice from 'utils/calculateTotalPrice'
 import { Redirect } from "react-router-dom";

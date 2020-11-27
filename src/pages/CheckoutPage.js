@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import InputGroup from 'sharedComponents/InputGroup'
 import calculateTotalPrice from 'utils/calculateTotalPrice'
 import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -8,7 +7,6 @@ const CheckoutPage = ({ order, updateOrderContext }) => {
   const { register, handleSubmit, watch } = useForm();
   const [submitted, setSubmitted] = useState(false)
   const form = watch();
-  console.log(form)
 
   const totalPrice = calculateTotalPrice(order.selectedIngredients)
   const isPaymentByCard = form.payment_type === 'card'
