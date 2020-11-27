@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import InputGroup from 'sharedComponents/InputGroup'
 import calculateTotalPrice from 'utils/calculateTotalPrice'
 import { Redirect } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const CheckoutPage = ({ order, updateOrderContext }) => {
+  const { register, handleSubmit, watch } = useForm();
   const [submitted, setSubmitted] = useState(false)
-  const [form, setForm] = useState({})
+  const form = watch();
+  console.log(form)
+
   const totalPrice = calculateTotalPrice(order.selectedIngredients)
+  const isPaymentByCard = form.payment_type === 'card'
+  console.log(isPaymentByCard)
 
   const submitForm = (event) => {
     event.preventDefault()
@@ -14,8 +20,8 @@ const CheckoutPage = ({ order, updateOrderContext }) => {
     setSubmitted(true)
   }
 
-  const onRadioInputChange = (event) => {
-    setForm({...form, [event.target.name]: event.target.value})
+  const normalizeCreditCard = (value) => {
+    return value.replace(/\s/g, "").match(/.{1,4}/g).join(' ').substr(0, 19) || ""
   }
 
   if (submitted) {
@@ -25,13 +31,36 @@ const CheckoutPage = ({ order, updateOrderContext }) => {
   return (
     <>
       <h2>Checkout</h2>
-      <form onSubmit={submitForm}>
+      <form onSubmit={handleSubmit(submitForm)}>
         <input type="submit" value={`Заказать за ${totalPrice}$`} />
 
-        <InputGroup type="radio" onChange={onRadioInputChange} title="Оплата" inputDataList={[
-          {name: "payment_type", value: "card", title: "Картой"},
-          {name: "payment_type", value: "cash", title: "Наличка"}
-          ]} />
+        <fieldset>
+          <legend>Форма оплаты:</legend>
+
+          <input ref={register} type="radio" id="payment_type_card" name="payment_type" value="card" />
+          <label htmlFor="payment_type_card">Картой</label>
+
+          <input ref={register} type="radio" id="payment_type_cash" name="payment_type" value="cash" />
+          <label htmlFor="payment_type_cash">Наличкой</label>
+        </fieldset>
+
+        {isPaymentByCard && <>
+          <fieldset>
+            <legend>Карта:</legend>
+
+            <label>номер</label>
+            <input
+              type="cc-card"
+              name="credit-card"
+              ref={register}
+              placeholder="0000 0000 0000 0000"
+              onChange={(event) => {
+                const { value } = event.target;
+                event.target.value = normalizeCreditCard(value);
+              }} />
+          </fieldset>
+        </>
+        }
       </form>
     </>
   );

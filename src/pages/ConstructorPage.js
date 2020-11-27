@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 const ConstructorPage = ({ updateOrderContext }) => {
   const { register, handleSubmit, watch } = useForm();
   const [submitted, setSubmitted] = useState(false)
-  const formElement = useRef();
   const selectedIngredients = watch();
   const totalPrice = calculateTotalPrice(selectedIngredients);
 
@@ -21,7 +20,7 @@ const ConstructorPage = ({ updateOrderContext }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(submitForm)} ref={formElement}>
+    <form onSubmit={handleSubmit(submitForm)}>
       <h2>Конструктор Пицы</h2>
 
       <input type="submit" value={`Заказать за ${totalPrice}$`} />

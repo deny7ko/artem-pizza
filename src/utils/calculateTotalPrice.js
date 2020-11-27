@@ -2,7 +2,7 @@ import getIngredientPrice from './getIngredientPrice'
 
 const STARTING_PRICE = 200
 
-const calculateTotalPrice = (ingredients) => {
+const calculateTotalPrice = (ingredients = {}) => {
   let ingredientsPrices = []
   for (const [key, value] of Object.entries(ingredients)) {
     // next if ingredient is empty
