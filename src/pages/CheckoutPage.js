@@ -12,8 +12,7 @@ const CheckoutPage = ({ order, updateOrderContext }) => {
   const isPaymentByCard = form.payment_type === 'card'
   console.log(isPaymentByCard)
 
-  const submitForm = (event) => {
-    event.preventDefault()
+  const submitForm = () => {
     updateOrderContext(form)
     setSubmitted(true)
   }
