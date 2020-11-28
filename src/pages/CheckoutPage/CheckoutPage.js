@@ -17,6 +17,7 @@ const CheckoutPage = ({ order, updateOrderContext }) => {
   }
 
   const normalizeCreditCard = (value) => {
+    console.log('type')
     return value.replace(/\s/g, "").match(/.{1,4}/g).join(' ').substr(0, 19) || ""
   }
 
@@ -34,26 +35,29 @@ const CheckoutPage = ({ order, updateOrderContext }) => {
           <legend>Форма оплаты:</legend>
 
           <input ref={register} type="radio" id="payment_type_card" name="payment_type" value="card" />
-          <label htmlFor="payment_type_card">Картой</label>
+          <label htmlFor="payment_type_card">Card</label>
 
           <input ref={register} type="radio" id="payment_type_cash" name="payment_type" value="cash" />
-          <label htmlFor="payment_type_cash">Наличкой</label>
+          <label htmlFor="payment_type_cash">Cash</label>
         </fieldset>
 
         {isPaymentByCard && <>
           <fieldset>
-            <legend>Карта:</legend>
+            <legend>Card:</legend>
 
-            <label>номер</label>
+            <label htmlFor='credit-card'>Number</label>
             <input
               type="cc-card"
+              id="credit-card"
               name="credit-card"
               ref={register}
               placeholder="0000 0000 0000 0000"
               onChange={(event) => {
                 const { value } = event.target;
                 event.target.value = normalizeCreditCard(value);
-              }} />
+              }}
+            />
+
           </fieldset>
         </>
         }
