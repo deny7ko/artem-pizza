@@ -1,6 +1,6 @@
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
-import CheckoutPage from "./CheckoutPage"
+import CheckoutPage from "./"
 
 const arrangeTest = ({order = {}, updateOrderContext = jest.fn() } = {}) => {
   return render(<CheckoutPage order={order} updateOrderContext={updateOrderContext}/>);
@@ -9,6 +9,7 @@ const arrangeTest = ({order = {}, updateOrderContext = jest.fn() } = {}) => {
 describe('CheckoutPage', () => {
   it('groups numbers in groups of 4s: 0000 0000 0000 0000', () => {
     arrangeTest()
+
     const findNameInput = () => screen.getByLabelText('Number', { selector: 'input' })
 
     act(() => {

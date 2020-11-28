@@ -1,9 +1,9 @@
 import { render, screen, act, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
-import App from './App';
 import { OrderProvider } from "./contexts/OrderContext"
+import App from './App';
 
-const renderApplication = () => {
+const arrangeTest = () => {
   act(() => {
     render(
       <OrderProvider>
@@ -11,84 +11,41 @@ const renderApplication = () => {
       </OrderProvider>
     );
   })
+
+  describe('navigation', () => {
+    describe('when user clicks on `Select Pizza`', () => {
+      it('goes to Constructor page', () => {
+        arrangeTest()
+
+        act(() => {
+          userEvent.click(screen.getByText('Select Pizza'))
+        })
+
+        expect(screen.getByText('Конструктор Пицы')).toBeInTheDocument()
+      })
+    })
+
+    describe('when user clicks on `Login`', () => {
+      it('goes to login page', () => {
+        arrangeTest()
+
+        act(() => {
+          userEvent.click(screen.getByText('Login'))
+        })
+
+        expect(screen.getByTestId('login-page-submit')).toBeInTheDocument()
+      })
+    })
+
+    describe('when user clicks on `Register`', () => {
+      it('goes to register page', () => {
+        arrangeTest()
+        act(() => {
+          userEvent.click(screen.getByText('Register'))
+        })
+
+        expect(screen.getByTestId('registration-page-submit')).toBeInTheDocument()
+      })
+    })
+  })
 }
-
-describe('when user clicks on `Select Pizza`', () => {
-  it('calculates price on each click', () => {
-    renderApplication()
-
-    act(() => {
-      userEvent.click(screen.getByText('Select Pizza'))
-    })
-
-    act(() => {
-      userEvent.click(screen.getByText('35cm'))
-    })
-
-    expect(screen.getByText('Заказать за 229$')).toBeInTheDocument()
-
-    act(() => {
-      userEvent.click(screen.getByText('пышное'))
-      userEvent.click(screen.getByText('белый'))
-      userEvent.click(screen.getByText('моцарелла'))
-      userEvent.click(screen.getByText('чеддар'))
-      userEvent.click(screen.getByText('перец'))
-      userEvent.click(screen.getByText('бекон'))
-    })
-
-    expect(screen.getByText('Заказать за 403$')).toBeInTheDocument()
-  })
-
-  it('proceeds to the checkout page after pizza constructor', async () => {
-    renderApplication()
-
-    act(() => {
-      userEvent.click(screen.getByText('Select Pizza'))
-    })
-
-    act(() => {
-      userEvent.click(screen.getByText('Заказать за 200$'))
-    })
-
-    await waitFor(() => {
-      expect(screen.getByText('Checkout')).toBeInTheDocument()
-    })
-  })
-})
-
-describe('navigation', () => {
-  describe('when user clicks on `Select Pizza`', () => {
-    it('goes to Constructor page', () => {
-      renderApplication()
-
-      act(() => {
-        userEvent.click(screen.getByText('Select Pizza'))
-      })
-
-      expect(screen.getByText('Конструктор Пицы')).toBeInTheDocument()
-    })
-  })
-
-  describe('when user clicks on `Login`', () => {
-    it('goes to login page', () => {
-      renderApplication()
-
-      act(() => {
-        userEvent.click(screen.getByText('Login'))
-      })
-
-      expect(screen.getByTestId('login-page-submit')).toBeInTheDocument()
-    })
-  })
-
-  describe('when user clicks on `Register`', () => {
-    it('goes to register page', () => {
-      renderApplication()
-      act(() => {
-        userEvent.click(screen.getByText('Register'))
-      })
-
-      expect(screen.getByTestId('registration-page-submit')).toBeInTheDocument()
-    })
-  })
-})
