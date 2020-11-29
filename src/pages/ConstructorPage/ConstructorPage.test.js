@@ -1,18 +1,16 @@
-import { render, screen, act, waitFor } from '@testing-library/react';
+import { render, screen, act, cleanup, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
-import { createMemoryHistory } from "history";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import renderWithRouter from 'testingUtils/renderWithRouter'
 
-import { MemoryRouter } from "react-router-dom"
 import ConstructorPage from "./"
 
 const arrangeTest = ({ updateOrderContext = jest.fn() } = {}) => {
   return render(
-    <MemoryRouter>
-      <ConstructorPage updateOrderContext={updateOrderContext}/>
-    </MemoryRouter>
+    <ConstructorPage updateOrderContext={updateOrderContext}/>
   );
 }
+
+afterEach(cleanup)
 
 describe('ConstructorPage', () => {
   it('calculates price on each click', () => {
@@ -56,19 +54,17 @@ describe('ConstructorPage', () => {
     expect(screen.getByText('Заказать за 403$')).toBeInTheDocument()
   })
 
-  it.skip('redirects to checkout page on submit', async () => {
-    const history = createMemoryHistory();
-
-    render(
-      <Router>
-        <ConstructorPage updateOrderContext={jest.fn()}/>
-      </Router>
+  it('redirects to checkout page on submit', () => {
+    const { history } = renderWithRouter(
+      <ConstructorPage updateOrderContext={jest.fn()}/>
     )
 
     act(() => {
       userEvent.click(screen.getByText('Заказать за 200$'))
     })
 
-    expect(history.location.pathname).toBe("/login");
+    waitFor(() => {
+      expect(history.location.pathname).toBe("/checkout")
+    })
   })
 })

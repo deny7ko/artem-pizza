@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 
 const ConstructorPage = ({ updateOrderContext }) => {
   const { register, handleSubmit, watch } = useForm();
+
   const [submitted, setSubmitted] = useState(false)
   const selectedIngredients = watch();
   const totalPrice = calculateTotalPrice(selectedIngredients);
