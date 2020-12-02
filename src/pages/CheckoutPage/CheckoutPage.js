@@ -2,22 +2,35 @@ import React, { useState } from "react";
 import calculateTotalPrice from 'utils/calculateTotalPrice'
 import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useMutation } from 'react-query'
+import { postOrder } from 'api'
 
 const CheckoutPage = ({ order, updateOrderContext }) => {
   const { register, handleSubmit, watch } = useForm();
   const [submitted, setSubmitted] = useState(false)
+  const [postOrderMutate] = useMutation(postOrder)
+
   const form = watch();
 
   const totalPrice = calculateTotalPrice(order.selectedIngredients)
   const isPaymentByCard = form.payment_type === 'card'
 
-  const submitForm = () => {
-    updateOrderContext(form)
+  const submitForm = async () => {
+    try {
+      await postOrderMutate({
+        ingredients: order.selectedIngredients,
+        card_number: form.card_number
+      })
+
+      updateOrderContext(form)
+    } catch (error) {
+      console.error(error)
+    }
+
     setSubmitted(true)
   }
 
   const normalizeCreditCard = (value) => {
-    console.log('type')
     return value.replace(/\s/g, "").match(/.{1,4}/g).join(' ').substr(0, 19) || ""
   }
 
@@ -45,11 +58,11 @@ const CheckoutPage = ({ order, updateOrderContext }) => {
           <fieldset>
             <legend>Card:</legend>
 
-            <label htmlFor='credit-card'>Number</label>
+            <label htmlFor='card_number'>Number</label>
             <input
               type="cc-card"
               id="credit-card"
-              name="credit-card"
+              name="card_number"
               ref={register}
               placeholder="0000 0000 0000 0000"
               onChange={(event) => {
