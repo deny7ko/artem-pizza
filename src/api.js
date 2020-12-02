@@ -11,3 +11,9 @@ export const postOrder = async ({ ingredients, card_number }) => {
     .then((response) => response.json())
     .then((json) => console.log(json))
 }
+
+export const getOrders = async () => (
+  await fetch(`${BASE_URL}/orders`).then((res) =>
+    res.json()
+  )
+)
