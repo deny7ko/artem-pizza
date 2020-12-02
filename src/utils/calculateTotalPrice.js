@@ -2,9 +2,14 @@ import getIngredientPrice from './getIngredientPrice'
 
 const STARTING_PRICE = 200
 
-const calculateTotalPrice = (ingredients) => {
+const calculateTotalPrice = (ingredients = {}) => {
   let ingredientsPrices = []
   for (const [key, value] of Object.entries(ingredients)) {
+    // next if ingredient is empty
+    if (!Boolean(value)) {
+      continue
+    }
+
     if (Array.isArray(value)) {
       value.forEach(itemValue => {
         const ingredientPrice = getIngredientPrice({ name: itemValue })
@@ -16,7 +21,7 @@ const calculateTotalPrice = (ingredients) => {
     }
   }
 
- const totalPrice = ingredientsPrices.reduce((accumulator, currentValue) => {
+  const totalPrice = ingredientsPrices.reduce((accumulator, currentValue) => {
     return accumulator + currentValue
   }, STARTING_PRICE)
 
