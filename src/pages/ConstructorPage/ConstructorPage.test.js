@@ -54,7 +54,7 @@ describe('ConstructorPage', () => {
     expect(screen.getByText('Заказать за 403$')).toBeInTheDocument()
   })
 
-  it('redirects to checkout page on submit', () => {
+  it('redirects to checkout page on submit', async () => {
     const { history } = renderWithRouter(
       <ConstructorPage updateOrderContext={jest.fn()}/>
     )
@@ -63,7 +63,7 @@ describe('ConstructorPage', () => {
       userEvent.click(screen.getByText('Заказать за 200$'))
     })
 
-    waitFor(() => {
+    await waitFor(() => {
       expect(history.location.pathname).toBe("/checkout")
     })
   })
