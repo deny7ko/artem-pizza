@@ -7,6 +7,7 @@ const Layout = ({ children }) => {
       <nav>
         <p>
           <Link to="/admin/topping-list">Topping List</Link>
+          <Link to="/admin/ingredients/new">Create Ingredient</Link>
         </p>
       </nav>
 
