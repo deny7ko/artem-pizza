@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import { getOrders } from 'api'
 
 const OrderListPage = () => {
-  const { isLoading, isError, data: orderList, error } = useQuery('todos', getOrders)
+  const { isLoading, isError, data: orderList, error } = useQuery('orders', getOrders)
 
   if (isError) {
     return <>Error: {JSON.stringify(error)}</>;

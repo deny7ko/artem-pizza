@@ -1,15 +1,21 @@
 import React from 'react'
 import './App.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import ProductCreationPage from './pages/ProductCreationPage'
+import Layout from './Layout'
+import ToppingListPage from './pages/ToppingListPage'
 
 const App = () => {
   return (
-  <Router>
-    <Route exact path="/admin">
-      <ProductCreationPage />
-    </Route>
-  </Router>
+    <Router>
+      <Layout>
+        <Route exact path="/admin">
+        </Route>
+
+        <Route exact path="/admin/topping-list">
+          <ToppingListPage />
+        </Route>
+      </Layout>
+    </Router>
   )
 }
 

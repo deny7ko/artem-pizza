@@ -6,16 +6,12 @@ const Layout = ({ children }) => {
     <div style={{ padding: "2em" }}>
       <nav>
         <p>
-          <Link to="/register">Register</Link> or <Link to="/login">Login</Link>
-        </p>
-
-        <p>
-          <Link to="/constructor">Select Pizza</Link>
+          <Link to="/admin/topping-list">Topping List</Link>
         </p>
       </nav>
+
       {children}
     </div>
-
   );
 }
 
