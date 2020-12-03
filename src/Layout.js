@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
         </p>
 
         <p>
-          <Link to="/orders-list">Orders List</Link>
+          <Link to="/order-list">Order List</Link>
         </p>
       </nav>
       {children}

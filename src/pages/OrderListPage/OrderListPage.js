@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import { getOrders } from 'api'
 
 const OrderListPage = () => {
-  const { isLoading, isError, data, error } = useQuery('todos', getOrders)
+  const { isLoading, isError, data: orderList, error } = useQuery('todos', getOrders)
 
   if (isError) {
     return <>Error: {JSON.stringify(error)}</>;
@@ -13,7 +13,13 @@ const OrderListPage = () => {
     return <>Loading...</>;
   }
 
-  return <>{JSON.stringify(data)}</>;
+  return <>{orderList.map((order, orderIndex) => (
+    <details>
+      <summary>Order #{orderIndex}</summary>
+      {JSON.stringify(order.ingredients)}
+    </details>
+
+  ))}</>;
 }
 
 export default OrderListPage
