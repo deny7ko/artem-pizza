@@ -2,8 +2,9 @@ import React from 'react'
 import './App.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Layout from './Layout'
-import ToppingListPage from './pages/ToppingListPage'
+import IngredientListPage from './pages/IngredientListPage'
 import IngredientCreatePage from './pages/IngredientCreatePage'
+import IngredientEditPage from './pages/IngredientEditPage'
 
 const App = () => {
   return (
@@ -16,8 +17,12 @@ const App = () => {
           <IngredientCreatePage />
         </Route>
 
-        <Route exact path="/admin/topping-list">
-          <ToppingListPage />
+        <Route exact path="/admin/ingredient-list">
+          <IngredientListPage />
+        </Route>
+
+        <Route exact path="/admin/ingredients/:id/edit">
+          <IngredientEditPage />
         </Route>
       </Layout>
     </Router>
