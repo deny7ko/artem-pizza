@@ -19,7 +19,7 @@ export const postIngredient = async ({ name, slug, price, category, image }) => 
     },
   })
     .then((response) => response.json())
-    .then((json) => console.log(json))
+    .then(json)
 }
 
 export const updateIngredient = async ({ id, name, slug, price, category, image }) => {
@@ -31,11 +31,11 @@ export const updateIngredient = async ({ id, name, slug, price, category, image 
     },
   })
     .then((response) => response.json())
-    .then((json) => console.log(json))
+    .then(json)
 }
 
 export const deleteIngredient = async (id) => {
   fetch(`${BASE_URL}/ingredients/${id}`, {method: 'DELETE'})
     .then((response) => response.json())
-    .then((json) => console.log(json))
+    .then(json)
 }

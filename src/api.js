@@ -9,7 +9,7 @@ export const postOrder = async ({ ingredients, card_number }) => {
     },
   })
     .then((response) => response.json())
-    .then((json) => console.log(json))
+    .then(json)
 }
 
 export const getOrders = async () => (
