@@ -21,7 +21,7 @@ const App = () => {
           <IngredientListPage />
         </Route>
 
-        <Route exact path="/admin/ingredients/:id/edit">
+        <Route exact path="/admin/ingredients/:ingredientId/edit">
           <IngredientEditPage />
         </Route>
       </Layout>

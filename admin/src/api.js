@@ -4,9 +4,11 @@ export const getIngredientList = async () => (
   fetch(`${BASE_URL}/ingredients`).then((res) => res.json())
 )
 
-export const getIngredient = async (id) => (
-  fetch(`${BASE_URL}/ingredients/${id}`).then((res) => res.json())
-)
+export const getIngredient = async (id) => {
+  return (
+    fetch(`${BASE_URL}/ingredients/${id}`).then((res) => res.json())
+  )
+}
 
 export const postIngredient = async ({ name, slug, price, category, image }) => {
   fetch(`${BASE_URL}/ingredients`, {

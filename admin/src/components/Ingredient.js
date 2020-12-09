@@ -24,7 +24,7 @@ const Ingredient = ({id, name, price}) => {
       </p>
 
       <p style={{color: 'blue'}}>
-        <Link to={`/admin/ingredients/${id}`}>Edit</Link>
+        <Link to={`/admin/ingredients/${id}/edit`}>Edit</Link>
       </p>
     </>
   )
