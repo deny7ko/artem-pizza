@@ -1,31 +1,31 @@
-import getIngredientPrice from './getIngredientPrice'
+import getIngredientPrice from "./getIngredientPrice";
 
-const STARTING_PRICE = 200
+const STARTING_PRICE = 200;
 
 const calculateTotalPrice = (ingredients = {}) => {
-  let ingredientsPrices = []
+  let ingredientsPrices = [];
   for (const [key, value] of Object.entries(ingredients)) {
     // next if ingredient is empty
     if (!Boolean(value)) {
-      continue
+      continue;
     }
 
     if (Array.isArray(value)) {
-      value.forEach(itemValue => {
-        const ingredientPrice = getIngredientPrice({ name: itemValue })
-        ingredientsPrices.push(ingredientPrice)
-      })
+      value.forEach((itemValue) => {
+        const ingredientPrice = getIngredientPrice({ name: itemValue });
+        ingredientsPrices.push(ingredientPrice);
+      });
     } else {
-      const ingredientPrice = getIngredientPrice({ type: key, name: value })
-      ingredientsPrices.push(ingredientPrice)
+      const ingredientPrice = getIngredientPrice({ type: key, name: value });
+      ingredientsPrices.push(ingredientPrice);
     }
   }
 
   const totalPrice = ingredientsPrices.reduce((accumulator, currentValue) => {
-    return accumulator + currentValue
-  }, STARTING_PRICE)
+    return accumulator + currentValue;
+  }, STARTING_PRICE);
 
-  return totalPrice
-}
+  return totalPrice;
+};
 
-export default calculateTotalPrice
+export default calculateTotalPrice;

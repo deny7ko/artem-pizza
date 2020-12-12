@@ -1,7 +1,7 @@
-import React, { useEffect, useState }from 'react';
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useMutation, useQuery } from 'react-query';
-import { getIngredient, updateIngredient } from 'api';
+import { useMutation, useQuery } from "react-query";
+import { getIngredient, updateIngredient } from "api";
 import { useParams } from "react-router-dom";
 
 const IngredientEditPage = () => {
@@ -9,33 +9,34 @@ const IngredientEditPage = () => {
 
   const { register, handleSubmit, reset } = useForm();
   const { isLoading, data: ingredient } = useQuery(
-    ingredientId, getIngredient, { onSuccess: (data) => {
-      reset(data)
-  } })
-  const [updateIngredientMutate] = useMutation(updateIngredient)
+    ingredientId,
+    getIngredient,
+    {
+      onSuccess: (data) => {
+        reset(data);
+      },
+    }
+  );
+  const [updateIngredientMutate] = useMutation(updateIngredient);
 
   if (isLoading) {
-    return <>Loading ...</>
+    return <>Loading ...</>;
   }
 
   const submitForm = (data) => {
-    updateIngredientMutate(
-      {
-        id: ingredientId,
-        name: data.name,
-        slug: data.slug,
-        price: data.price,
-        category: data.category
-      }
-    )
-    alert(JSON.stringify(data))
-  }
+    updateIngredientMutate({
+      id: ingredientId,
+      name: data.name,
+      slug: data.slug,
+      price: data.price,
+      category: data.category,
+    });
+    alert(JSON.stringify(data));
+  };
 
   return (
     <>
-      <h1>
-        Edit Ingredient: {ingredient.name}
-      </h1>
+      <h1>Edit Ingredient: {ingredient.name}</h1>
 
       <form onSubmit={handleSubmit(submitForm)}>
         <div>
@@ -47,12 +48,12 @@ const IngredientEditPage = () => {
           <input ref={register} type="text" name="slug"></input>
         </div>
         <div>
-          <label >Price</label>
+          <label>Price</label>
           <input ref={register} type="tel" name="price"></input>
         </div>
         <div>
           <label>Category</label>
-          <select  name="category" ref={register}>
+          <select name="category" ref={register}>
             <option value="">--Please choose an option--</option>
             <option value="vegetables">Vegetables</option>
             <option value="sauces">Sauces</option>
@@ -68,7 +69,7 @@ const IngredientEditPage = () => {
         <button>Update</button>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default IngredientEditPage
+export default IngredientEditPage;

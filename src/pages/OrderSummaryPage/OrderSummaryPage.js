@@ -1,5 +1,5 @@
 import React from "react";
-import Summary from './Summary'
+import Summary from "./Summary";
 
 const OrderSummaryPage = ({ order }) => {
   return (
@@ -8,6 +8,6 @@ const OrderSummaryPage = ({ order }) => {
       {order && <Summary order={order} />}
     </>
   );
-}
+};
 
-export default OrderSummaryPage
+export default OrderSummaryPage;

@@ -1,1 +1,1 @@
-export { default } from './ConstructorPage'
+export { default } from "./ConstructorPage";

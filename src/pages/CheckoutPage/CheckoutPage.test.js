@@ -1,25 +1,28 @@
-import { render, screen, act } from '@testing-library/react';
-import userEvent from '@testing-library/user-event'
-import CheckoutPage from "./"
+import { render, screen, act } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import CheckoutPage from "./";
 
-const arrangeTest = ({order = {}, updateOrderContext = jest.fn() } = {}) => {
-  return render(<CheckoutPage order={order} updateOrderContext={updateOrderContext}/>);
-}
+const arrangeTest = ({ order = {}, updateOrderContext = jest.fn() } = {}) => {
+  return render(
+    <CheckoutPage order={order} updateOrderContext={updateOrderContext} />
+  );
+};
 
-describe('CheckoutPage', () => {
-  it('groups numbers in groups of 4s: 0000 0000 0000 0000', () => {
-    arrangeTest()
+describe("CheckoutPage", () => {
+  it("groups numbers in groups of 4s: 0000 0000 0000 0000", () => {
+    arrangeTest();
 
-    const findNameInput = () => screen.getByLabelText('Number', { selector: 'input' })
+    const findNameInput = () =>
+      screen.getByLabelText("Number", { selector: "input" });
 
     act(() => {
-      userEvent.click(screen.getByLabelText('Card'))
-    })
+      userEvent.click(screen.getByLabelText("Card"));
+    });
 
     act(() => {
-      userEvent.type(findNameInput(), '1234567890123456')
-    })
+      userEvent.type(findNameInput(), "1234567890123456");
+    });
 
-    expect(findNameInput()).toHaveValue('1234 5678 9012 3456')
-  })
-})
+    expect(findNameInput()).toHaveValue("1234 5678 9012 3456");
+  });
+});

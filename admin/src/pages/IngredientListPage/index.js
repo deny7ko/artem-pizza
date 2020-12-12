@@ -1,1 +1,1 @@
-export { default } from './IngredientListPage'
+export { default } from "./IngredientListPage";

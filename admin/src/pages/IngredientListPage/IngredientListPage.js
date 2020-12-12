@@ -1,20 +1,21 @@
 import React from "react";
-import { useQuery } from 'react-query'
-import { getIngredientList } from 'api'
-import Ingredient from 'components/Ingredient'
+import { useQuery } from "react-query";
+import { getIngredientList } from "api";
+import Ingredient from "components/Ingredient";
 
 const IngredientListPage = () => {
-  const { isLoading, data: ingredientList } = useQuery('ingredientList', getIngredientList)
+  const { isLoading, data: ingredientList } = useQuery(
+    "ingredientList",
+    getIngredientList
+  );
 
   if (isLoading) {
-    return <>Loading ...</>
+    return <>Loading ...</>;
   }
 
   return (
     <>
-      <h1>
-        Ingredient List
-      </h1>
+      <h1>Ingredient List</h1>
 
       {ingredientList.map((ingredient) => {
         return (
@@ -22,10 +23,10 @@ const IngredientListPage = () => {
             <Ingredient {...ingredient} />
             <hr />
           </div>
-        )
+        );
       })}
     </>
-  )
-}
+  );
+};
 
-export default IngredientListPage
+export default IngredientListPage;

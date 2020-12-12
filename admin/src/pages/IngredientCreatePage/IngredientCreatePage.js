@@ -1,30 +1,26 @@
-import React from 'react';
+import React from "react";
 import { useForm } from "react-hook-form";
-import { useMutation } from 'react-query';
-import { postIngredient } from 'api';
+import { useMutation } from "react-query";
+import { postIngredient } from "api";
 
 const IngredientCreatePage = () => {
   const { register, handleSubmit } = useForm();
-  const [postIngredientMutate] = useMutation(postIngredient)
+  const [postIngredientMutate] = useMutation(postIngredient);
 
   const submitForm = (data) => {
-    postIngredientMutate(
-      {
-        name: data.name,
-        slug: data.name,
-        price: data.price,
-        category: data.category
-        // image: data.image
-      }
-    )
-    alert(JSON.stringify(data))
-  }
+    postIngredientMutate({
+      name: data.name,
+      slug: data.name,
+      price: data.price,
+      category: data.category,
+      // image: data.image
+    });
+    alert(JSON.stringify(data));
+  };
 
   return (
     <>
-      <h1>
-        New Ingredient
-      </h1>
+      <h1>New Ingredient</h1>
 
       <form onSubmit={handleSubmit(submitForm)}>
         <div>
@@ -36,12 +32,12 @@ const IngredientCreatePage = () => {
           <input ref={register} type="text" name="slug"></input>
         </div>
         <div>
-          <label >Price</label>
+          <label>Price</label>
           <input ref={register} type="tel" name="price"></input>
         </div>
         <div>
           <label>Category</label>
-          <select  name="category" ref={register}>
+          <select name="category" ref={register}>
             <option value="">--Please choose an option--</option>
             <option value="vegetables">Vegetables</option>
             <option value="sauces">Sauces</option>
@@ -57,7 +53,7 @@ const IngredientCreatePage = () => {
         <button>Create</button>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default IngredientCreatePage
+export default IngredientCreatePage;
