@@ -12,6 +12,10 @@ const Layout = ({ children }) => {
         <p>
           <Link to="/constructor">Select Pizza</Link>
         </p>
+
+        <p>
+          <Link to="/order-list">Order List</Link>
+        </p>
       </nav>
       {children}
     </div>
