@@ -1,5 +1,8 @@
 const BASE_URL = "http://localhost:3000";
 
+export const getIngredientList = async () =>
+  fetch(`${BASE_URL}/ingredients`).then((response) => response.json());
+
 export const postOrder = async ({ ingredients, card_number }) => {
   fetch(`${BASE_URL}/orders`, {
     method: "POST",

@@ -1,13 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import calculateTotalPrice from "utils/calculateTotalPrice";
 import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchIngredients } from "state/ingredients/thunk";
+import {
+  getIngredients,
+  getIsLoading,
+  getIngredientsByCategory,
+} from "state/ingredients/selectors";
+
+export const filterIngredientListByCategory = (ingredientList, category) => {
+  if (Boolean(ingredientList)) {
+    return ingredientList.filter((item) => (item.category = category));
+  } else {
+    return [];
+  }
+};
 
 const ConstructorPage = ({ updateOrderContext }) => {
   const { register, handleSubmit, watch } = useForm();
   const [submitted, setSubmitted] = useState(false);
   const selectedIngredients = watch();
   const totalPrice = calculateTotalPrice(selectedIngredients);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchIngredients());
+  }, []);
+
+  const isLoading = useSelector(getIsLoading);
+  const ingredients = useSelector(getIngredients);
+  console.log(ingredients);
+  const sauces = useSelector(getIngredientsByCategory("sauces"));
+  const meat = useSelector(getIngredientsByCategory("meat"));
+  const vegetables = useSelector(getIngredientsByCategory("vegetables"));
+
+  console.log(isLoading);
+
+  if (isLoading) {
+    return <>Ingredients are Loading ...</>;
+  }
 
   const submitForm = () => {
     updateOrderContext({ selectedIngredients });
