@@ -4,12 +4,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { OrderProvider } from "./contexts/OrderContext";
+import { store } from "./store";
+import { Provider } from "react-redux";
 
 ReactDOM.render(
   <React.StrictMode>
-    <OrderProvider>
-      <App />
-    </OrderProvider>
+    <Provider store={store}>
+      <OrderProvider>
+        <App />
+      </OrderProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
