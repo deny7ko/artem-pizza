@@ -1,44 +1,23 @@
 import { composeWithDevTools } from "redux-devtools-extension";
-import {
-  configureStore,
-  createReducer,
-  createAction,
-  createSlice,
-} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 
-const initialState = { value: 0 };
-
-export const counter = createSlice({
-  name: "counter",
-  initialState,
-  reducers: {
-    increment: (state) => {
-      state.value++;
-    },
-    decrement: (state) => {
-      state.value--;
-    },
-  },
-});
-
-// const counterReducer = createReducer(initialState, (builder) => {
-//   builder
-//     .addCase('counter/increment', (state) => {
-//       state.value++
-//     })
-//     .addCase('counter/decrement', (state) => {
-//       state.value--
-//     })
-// })
+const counterReducer = (state = { value: 0 }, action) => {
+  switch (action.type) {
+    case "increment":
+      return { value: state.value + 1 };
+    case "decrement":
+      return { value: state.value - 1 };
+    default:
+      return state;
+  }
+};
 
 const composeEnhancers = composeWithDevTools({
   // Specify here name, actionsBlacklist, actionsCreators and other options
 });
 
 export const store = configureStore({
-  reducer: { counter: counter.reducer },
+  reducer: { counter: counterReducer },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
-
-store.subscribe(() => console.log(store.getState()));
