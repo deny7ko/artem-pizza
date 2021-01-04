@@ -25,11 +25,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g yarn
-    - name: yarn install, build, and test
+    - name: yarn install, test and release
       run: |
         yarn install
-        yarn build
         yarn test
+        yarn release
     - name: Deploy to netlify
       uses: netlify/actions/cli@master
       env:
