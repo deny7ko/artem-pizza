@@ -45,5 +45,5 @@ jobs:
         SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
         SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
       with:
-        environment: staging
+        environment: production
         sourcemaps: ./build
