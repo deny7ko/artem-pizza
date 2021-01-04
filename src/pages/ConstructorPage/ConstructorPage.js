@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchIngredients } from "state/ingredients/thunk";
 import {
-  getIngredients,
+  // getIngredients,
   getIsLoading,
-  getIngredientsByCategory,
+  // getIngredientsByCategory,
 } from "state/ingredients/selectors";
 
 export const filterIngredientListByCategory = (ingredientList, category) => {
@@ -27,16 +27,16 @@ const ConstructorPage = ({ updateOrderContext }) => {
 
   useEffect(() => {
     dispatch(fetchIngredients());
-  }, []);
+  }, [dispatch]);
 
   const isLoading = useSelector(getIsLoading);
-  const ingredients = useSelector(getIngredients);
-  console.log(ingredients);
-  const sauces = useSelector(getIngredientsByCategory("sauces"));
-  const meat = useSelector(getIngredientsByCategory("meat"));
-  const vegetables = useSelector(getIngredientsByCategory("vegetables"));
+  // const ingredients = useSelector(getIngredients);
+  // console.log(ingredients);
+  // const sauces = useSelector(getIngredientsByCategory("sauces"));
+  // const meat = useSelector(getIngredientsByCategory("meat"));
+  // const vegetables = useSelector(getIngredientsByCategory("vegetables"));
 
-  console.log(isLoading);
+  // console.log(isLoading);
 
   if (isLoading) {
     return <>Ingredients are Loading ...</>;

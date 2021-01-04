@@ -1,4 +1,3 @@
-import { composeWithDevTools } from "redux-devtools-extension";
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
 
@@ -13,11 +12,8 @@ const counterReducer = (state = { value: 0 }, action) => {
   }
 };
 
-const composeEnhancers = composeWithDevTools({
-  // Specify here name, actionsBlacklist, actionsCreators and other options
-});
-
 export const store = configureStore({
+  devTools: true,
   reducer: { counter: counterReducer },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
