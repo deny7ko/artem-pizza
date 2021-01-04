@@ -17,6 +17,7 @@ Sentry.init({
   release: process.env.REACT_APP_SENTRY_RELEASE,
   autoSessionTracking: true,
   integrations: [new Integrations.BrowserTracing()],
+
   // We recommend adjusting this value in production, or using tracesSampler
   // for finer control
   tracesSampleRate: 1.0,
