@@ -1,19 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-// import App from "./App";
+import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { OrderProvider } from "./contexts/OrderContext";
-// import { store } from "./store";
+import { store } from "./store";
 import { Provider } from "react-redux";
-import Counter from "./Counter/Counter";
-import { store } from "./Counter/store";
+// import Counter from "./Counter/Counter";
+// import { store } from "./Counter/store";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <OrderProvider>
-        <Counter />
+        <App />
       </OrderProvider>
     </Provider>
   </React.StrictMode>,
