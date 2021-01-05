@@ -10,6 +10,7 @@ import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 // import Counter from "./Counter/Counter";
 // import { store } from "./Counter/store";
+const name = "Denys";
 
 Sentry.init({
   dsn:
